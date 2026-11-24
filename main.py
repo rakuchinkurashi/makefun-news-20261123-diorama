@@ -22,6 +22,8 @@ def main() -> None:
         raise SystemExit("entry image not found: %s" % SOURCE)
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     shutil.copyfile(SOURCE, TARGET)
+    if not TARGET.is_file() or TARGET.stat().st_size != SOURCE.stat().st_size:
+        raise SystemExit("entry image copy failed: %s" % TARGET)
 
 
 if __name__ == "__main__":
